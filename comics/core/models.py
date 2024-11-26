@@ -130,12 +130,13 @@ class Release(models.Model):
 os.umask(0o002)
 
 image_storage = FileSystemStorage(
-    location=settings.MEDIA_ROOT, base_url=settings.MEDIA_URL
+    location=settings.MEDIA_ROOT,  # type: ignore  # noqa: PGH003
+    base_url=settings.MEDIA_URL,  # type: ignore  # noqa: PGH003
 )
 
 
 def image_file_path(instance, filename):
-    return "{}/{}/{}".format(instance.comic.slug, filename[0], filename)
+    return f"{instance.comic.slug}/{filename[0]}/{filename}"
 
 
 class Image(models.Model):
@@ -175,4 +176,4 @@ class Image(models.Model):
         db_table = "comics_image"
 
     def __str__(self):
-        return "Image {}/{}...".format(self.comic.slug, self.checksum[:8])
+        return f"Image {self.comic.slug}/{self.checksum[:8]}..."

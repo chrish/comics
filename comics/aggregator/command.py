@@ -90,7 +90,7 @@ class Aggregator:
         elif date < crawler.history_capable:
             logger.info(
                 "%s: Adjusting date from %s to %s because of "
-                + "limited history capability",
+                "limited history capability",
                 crawler.comic.slug,
                 date,
                 crawler.history_capable,
@@ -99,7 +99,7 @@ class Aggregator:
         elif date > crawler.current_date:
             logger.info(
                 "%s: Adjusting date from %s to %s because the given "
-                + "date is in the future in the comic's time zone",
+                "date is in the future in the comic's time zone",
                 crawler.comic.slug,
                 date,
                 crawler.current_date,
@@ -135,7 +135,7 @@ class AggregatorConfig:
             comics = []
             for comic_slug in comic_slugs:
                 comics.append(self._get_comic_by_slug(comic_slug))
-            logger.debug("Crawl targets: %s" % comics)
+            logger.debug("Crawl targets: %s", comics)
             self.comics = comics
 
     def _get_comic_by_slug(self, comic_slug):
@@ -143,10 +143,10 @@ class AggregatorConfig:
 
         try:
             comic = Comic.objects.get(slug=comic_slug)
-        except Comic.DoesNotExist:
+        except Comic.DoesNotExist as exc:
             error_msg = "Comic %s not found" % comic_slug
             logger.error(error_msg)
-            raise ComicsError(error_msg)
+            raise ComicsError(error_msg) from exc
         return comic
 
     def set_date_interval(self, from_date, to_date):
@@ -170,10 +170,7 @@ class AggregatorConfig:
 
     def _validate_dates(self):
         if self.from_date and self.to_date and self.from_date > self.to_date:
-            error_msg = "From date ({}) after to date ({})".format(
-                self.from_date,
-                self.to_date,
-            )
+            error_msg = f"From date ({self.from_date}) after to date ({self.to_date})"
             logger.error(error_msg)
             raise ComicsError(error_msg)
         else:

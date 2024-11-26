@@ -2,7 +2,7 @@
 
 _Comics is a webcomics aggregator._
 
-[![CI](https://img.shields.io/github/workflow/status/jodal/comics/CI)](https://github.com/jodal/comics/actions?workflow=CI)
+[![CI](https://img.shields.io/github/actions/workflow/status/jodal/comics/ci.yml)](https://github.com/jodal/comics/actions/workflows/ci.yml)
 [![Docs](https://img.shields.io/readthedocs/comics)](https://comics.readthedocs.io/)
 [![Coverage](https://img.shields.io/codecov/c/gh/jodal/comics)](https://codecov.io/gh/jodal/comics)
 
@@ -33,6 +33,6 @@ dependencies, with a modern and maintainable deployment setup.
 
 ## License
 
-Comics is copyright 2009-2021 Stein Magnus Jodal and contributors.
+Comics is copyright 2009-2024 Stein Magnus Jodal and contributors.
 Comics is licensed under the
 [GNU Affero General Public License version 3](https://www.gnu.org/licenses/agpl-3.0.en.html).
